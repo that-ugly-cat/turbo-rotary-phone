@@ -105,12 +105,12 @@ if st.session_state['login_status']:
                     st.success("Rating submitted successfully.")
                 except Exception as e:
                     st.error(f"An error occurred: {e}")
-
+#### Tab 2, pool
     with tab2:
         pools = list(db.collection('pools').stream())
         pools_list = list(map(lambda x: x.to_dict(), pools))
         pools_dict = {item.pop("user"): item for item in pools_list}
-        st.write(pools_dict)
+        st.write(pools_dict[username])
         try:
             user_pool = pools_dict[username]
             st.write(f'Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:\n  {user_pool[recommended_1]}\n  {user_pool[recommended_2]}\n  {user_pool[recommended_3]}\n  {user_pool[recommended_4]}\n  {user_pool[recommended_5]}\n')
