@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 import numpy as np
 
-# Define users and passwords (for demonstration purposes only)
+#### Define users and passwords (for demonstration purposes only)
 # WARNING: This is not secure and is for demonstration only. Consider using a secure password handling and verification system.
 USER_PASSWORD_PAIRS = {
     "user1": "password1",
@@ -28,6 +28,7 @@ with st.sidebar:
             st.session_state['login_status'] = True
         else:
             st.error("Username/password is incorrect.")
+#### end login section
 
 # Main app content
 if st.session_state['login_status']:
