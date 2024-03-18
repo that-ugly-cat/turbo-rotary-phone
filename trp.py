@@ -111,8 +111,10 @@ if st.session_state['login_status']:
         pools = list(db.collection('pools').stream())
         pools_list = list(map(lambda x: x.to_dict(), pools))
         pools_dict = {item.pop("user"): item for item in pools_list}
-        user_pool = pools_dict[username]
-        #st.write(f'Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:\n {recommended_1}')
-        st.write(user_pool)
+        try:
+            user_pool = pools_dict[username]
+            st.write(f'Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:\n  {user_pool[recommended_1]}\n  {user_pool[recommended_2]}\n  {user_pool[recommended_3]}\n  {user_pool[recommended_4]}\n  {user_pool[recommended_5]}\n')
+        except: 
+            st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)')
 else:
     st.info("Please login to access the application.")
