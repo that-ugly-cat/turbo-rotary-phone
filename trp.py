@@ -108,5 +108,8 @@ if st.session_state['login_status']:
 
     with tab2:
         st.write("Your matches will be displayed here.")
+        pools = list(db.collection('pools').stream())
+        pools_list = list(map(lambda x: x.to_dict(), pools))
+        st.write(pools_list)
 else:
     st.info("Please login to access the application.")
