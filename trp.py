@@ -39,9 +39,9 @@ if submit_button:
     # Organizing inputs into a dictionary
     rating_details = {
         "rated_user": user_to_rate,
-        "rating_p": rating_p,
-        "rating_i": rating_i,
-        "rating_v": rating_v,
+        "rating_p": int(rating_p),
+        "rating_i": int(rating_i),
+        "rating_v": int(rating_v),
         "exclude": exclude,
         "mean_score": mean_score,
         "max_score": max_score,
