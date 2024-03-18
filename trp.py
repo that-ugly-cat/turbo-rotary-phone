@@ -110,6 +110,9 @@ if st.session_state['login_status']:
         st.write("Your matches will be displayed here.")
         pools = list(db.collection('pools').stream())
         pools_list = list(map(lambda x: x.to_dict(), pools))
-        st.write(pools_list)
+        pools_dict = {item.pop("user"): item for item in pools_list}
+        user_pool = pools_dict[username]
+        #st.write(f'Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:\n {recommended_1}')
+        st.write(user_pool)
 else:
     st.info("Please login to access the application.")
