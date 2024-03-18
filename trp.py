@@ -147,6 +147,7 @@ if st.session_state['login_status']:
                 # calculate delta (module) and append as new column
                 # order by mean (largest to smallest) and by delta (smallest to largest)
                 # Get top 5
+                # add asterisk to users giving a rating of 4 or more
                 # write to firebase
                 st.write(df_user)
 
