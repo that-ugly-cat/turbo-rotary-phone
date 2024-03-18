@@ -140,6 +140,7 @@ if st.session_state['login_status']:
             for user in average_scores_df['rated_user'].tolist():
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
+                df_user = df_user[df_user['exclude'] == False]
                 st.write(df_user)
 
         
