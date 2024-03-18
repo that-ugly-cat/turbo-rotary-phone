@@ -29,7 +29,6 @@ with st.form(key='rating_form'):
     submit_button = st.form_submit_button("Submit Rating")
 
 if submit_button:
-    # Calculate mean, max, and min of the scores
     # Calculating mean, max, min, and standard deviation
     mean_score = np.mean(scores)
     max_score = np.max(scores)
