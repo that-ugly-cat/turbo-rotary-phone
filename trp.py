@@ -19,8 +19,8 @@ db = firestore.Client.from_service_account_json('auth.json')
 
 #### User auth
 users = list(db.collection('trp_users').stream())
-users_list = list(map(lambda x: x.to_dict(), users))
-user_password_dict = {user_dict["user"]: user_dict["password"] for user_dict in users_list}
+logins_list = list(map(lambda x: x.to_dict(), users))
+user_password_dict = {user_dict["user"]: user_dict["password"] for user_dict in logins_list}
 
 USER_PASSWORD_PAIRS = user_password_dict
 
@@ -50,7 +50,7 @@ if st.session_state['login_status']:
     # Mock data for user selection
     userlist = list(user_password_dict.keys())
     userlist.remove(username)
-    users = ['a', 'a1', 'a2']
+    users = userlist
     
     st.title('TRP System🔥')
     
