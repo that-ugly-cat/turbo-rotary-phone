@@ -31,6 +31,9 @@ with st.sidebar:
 
 # Main app content
 if st.session_state['login_status']:
+    # Mock data for user selection
+    users = ['Persona 1', 'Persona 2', 'Persona 3', 'Persona 4', 'Persona 5']
+    
     st.title('TRP System🔥')
     
     tab1, tab2 = st.tabs(["Rate Users", "Your Matches"])
