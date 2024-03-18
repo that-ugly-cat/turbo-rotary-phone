@@ -54,17 +54,17 @@ if st.session_state['login_status']:
     
     st.title('TRP System🔥')
     
-    tab1, tab2 = st.tabs(["Rate Users", "Your Matches"])
+    tab1, tab2 = st.tabs(["Vota", "Il tuo pool"])
     
     with tab1:
         with st.form(key='rating_form'):
-            st.header("La mia opinione su...")
-            st.write("Poche brevi informazioni sul ranking")
+            st.header("Vota")
+            st.write("Poche brevi informazioni sul ranking vanno qui")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
             rating_p = st.slider("Voto alla persona (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_p")
             rating_i = st.slider("Voto all'interazione (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_i")
             rating_v = st.slider("Voto alle vibes (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_v")
-            st.write("Poche brevi informazioni sull'esclusione")
+            st.write("Poche brevi informazioni sull'esclusione vanno qui")
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
             submit_button = st.form_submit_button("Submit Rating")
 
@@ -102,9 +102,9 @@ if st.session_state['login_status']:
                 try:
                     doc_ref = db.collection('ratings').document()
                     doc_ref.set(rating_details)
-                    st.success("Rating submitted successfully.")
+                    st.success("Il tuo voto è stato registrato correttamente.")
                 except Exception as e:
-                    st.error(f"An error occurred: {e}")
+                    st.error(f"Mmmh, qualcosa è andato storto: {e}")
 #### Tab 2, pool
     with tab2:
         pools = list(db.collection('pools').stream())
