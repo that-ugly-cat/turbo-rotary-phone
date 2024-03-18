@@ -13,8 +13,8 @@ with st.form(key='rating_form'):
     # Slider for the rating
     rating = st.slider("Rate the user (1 = Worst, 5 = Best):", 1, 5, value=3)
 
-    # Text input for optional comments
-    comments = st.text_area("Comments (Optional):")
+    #match
+    st.toggle("Match?", value=False, disabled=False)
 
     # Submit button
     submit_button = st.form_submit_button("Submit Rating")
