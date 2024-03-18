@@ -137,7 +137,7 @@ if st.session_state['login_status']:
             # Sort the DataFrame by 'average score' from lowest to highest
             average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
             st.write(average_scores_df)
-            for user in users:
+            for user in average_scores_df['rated_user'].tolist():
                 st.write(user)
 
         
