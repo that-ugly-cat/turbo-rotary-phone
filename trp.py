@@ -3,6 +3,7 @@ from datetime import datetime
 import numpy as np
 from google.cloud import firestore # see: https://blog.streamlit.io/streamlit-firestore/
 import json
+from streamlit_star_rating import st_star_rating
 
 #### Firebase connection
 try:
@@ -62,6 +63,7 @@ if st.session_state['login_status']:
             st.write("Poche brevi informazioni sul ranking vanno qui")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
             rating_p = st.slider("Voto alla persona (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_p")
+            stars = st_star_rating("Please rate you experience", maxValue=5, defaultValue=3, key="rating")
             rating_i = st.slider("Voto all'interazione (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_i")
             rating_v = st.slider("Voto alle vibes (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_v")
             st.write("Poche brevi informazioni sull'esclusione vanno qui")
@@ -141,6 +143,12 @@ if st.session_state['login_status']:
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
                 df_user = df_user[df_user['exclude'] == False]
+                # get other rating and append as new column
+                # calculate mean and append as new column
+                # calculate delta (module) and append as new column
+                # order by mean (largest to smallest) and by delta (smallest to largest)
+                # Get top 5
+                # write to firebase
                 st.write(df_user)
 
         
