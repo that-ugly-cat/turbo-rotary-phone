@@ -1,25 +1,29 @@
 import streamlit as st
 
 # Mock data for user selection
-users = ['User 1', 'User 2', 'User 3', 'User 4', 'User 5']
+users = ['Persona 1', 'Persona 2', 'Persona 3', 'Persona 4', 'Persona 5']
 
-st.title('User Rating System')
+st.title('TRP System🔥')
 
 with st.form(key='rating_form'):
-    st.header("Rate a User")
+    st.header("La mia opinione su...")
+    st.write("Poche brevi informazioni sul ranking")
     # Dropdown to select the user to rate
-    user_to_rate = st.selectbox("Choose a user to rate:", options=users)
+    user_to_rate = st.selectbox("Scegli la persona:", options=users)
 
-    # Slider for the rating
-    rating = st.slider("Rate the user (1 = Worst, 5 = Best):", 1, 5, value=3)
+    # Slider 1 for the rating
+    rating_p = st.slider("Voto alla persona (1 = 😠, 5 = 🤩):", 1, 5, value=3)
+
+    # Slider 2 for the rating
+    rating_i = st.slider("Voto all'interazione (1 = 😠, 5 = 🤩):", 1, 5, value=3)
 
     #match
-    st.toggle("Match?", value=False, disabled=False)
+    match = st.checkbox('Proseguiamo?')
 
     # Submit button
     submit_button = st.form_submit_button("Submit Rating")
 
 if submit_button:
-    st.success(f"You rated {user_to_rate} as {rating}/5")
-    if comments:
-        st.info(f"Comments: {comments}")
+    st.info(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona) e con {rating_i}/5 (all'interazione).")
+    if match:
+        st.success(f"Hai deciso di proseguire con {user_to_rate}")
