@@ -2,6 +2,7 @@ import streamlit as st
 from datetime import datetime
 import numpy as np
 from google.cloud import firestore # see: https://blog.streamlit.io/streamlit-firestore/
+import json
 
 #### Firebase connection
 try:
@@ -11,6 +12,10 @@ try:
 except:
     firebase_connected = 'no'
     st.write('firebase NOT connected')
+
+with open('auth.json', 'w') as f:
+    json.dump(dict(st.secrets.firebase), f)
+    db = firestore.Client.from_service_account_json('auth.json')
 
 #### User auth
 @st.cache_data
