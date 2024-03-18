@@ -63,7 +63,7 @@ if st.session_state['login_status']:
             st.write("Poche brevi informazioni sul ranking vanno qui")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
             rating_p = st.slider("Voto alla persona (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_p")
-            stars = st_star_rating("Please rate you experience", maxValue=5, defaultValue=3, key="rating", emoticons = True)
+            stars = st_star_rating("Please rate you experience", maxValue=5, defaultValue=3, key="rating")
             rating_i = st.slider("Voto all'interazione (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_i")
             rating_v = st.slider("Voto alle vibes (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_v")
             st.write("Poche brevi informazioni sull'esclusione vanno qui")
