@@ -8,10 +8,10 @@ import json
 try:
     test_firebase_auth = st.secrets.firebase.type
     firebase_connected = 'yes'
-    st.write('firebase connected')
+    #st.write('firebase connected')
 except:
     firebase_connected = 'no'
-    st.write('firebase NOT connected')
+    #st.write('firebase NOT connected')
 
 with open('auth.json', 'w') as f:
     json.dump(dict(st.secrets.firebase), f)
