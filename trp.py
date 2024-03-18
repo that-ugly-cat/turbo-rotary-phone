@@ -66,7 +66,7 @@ if st.session_state['login_status']:
             rating_v = st.slider("Voto alle vibes (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_v")
             st.write("Poche brevi informazioni sull'esclusione vanno qui")
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
-            submit_button = st.form_submit_button("Submit Rating")
+            submit_button = st.form_submit_button("Vota!")
 
             # submit logic
             if submit_button: 
@@ -96,7 +96,6 @@ if st.session_state['login_status']:
                     st.error(f"Hai deciso di non proseguire con {user_to_rate}.")
                 else:
                     st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona), con {rating_i}/5 (all'interazione) e con {rating_v}/5 (alle vibes).")
-                st.json(rating_details)
                 
                 # Save rating to dataframe
                 try:
