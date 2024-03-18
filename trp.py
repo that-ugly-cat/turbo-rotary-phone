@@ -18,7 +18,9 @@ with open('auth.json', 'w') as f:
 db = firestore.Client.from_service_account_json('auth.json')
 
 #### User auth
-
+users = list(db.collection('trp_users').stream())
+users_dict = list(map(lambda x: x.to_dict(), users))
+st.write(users_dict)
 
 #### Define users and passwords (for demonstration purposes only)
 # WARNING: This is not secure and is for demonstration only. Consider using a secure password handling and verification system.
