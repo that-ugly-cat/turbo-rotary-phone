@@ -43,10 +43,10 @@ if submit_button:
         "rating_i": int(rating_i),
         "rating_v": int(rating_v),
         "exclude": exclude,
-        "mean_score": mean_score,
-        "max_score": max_score,
-        "min_score": min_score,
-        "std_score": std_score
+        "mean_score": round(mean_score, 2),
+        "max_score": int(max_score),
+        "min_score": int(min_score),
+        "std_score": round(std_score, 2)
     }
     
     if exclude:
