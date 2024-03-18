@@ -49,9 +49,35 @@ if st.session_state['login_status']:
             st.write("Poche brevi informazioni sull'esclusione")
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
             submit_button = st.form_submit_button("Submit Rating")
-    
-        # Your existing logic for handling form submission
-        # ...
+
+            # submit logic
+            if submit_button: 
+                # Get the current time 
+                current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                scores = [rating_p, rating_i, rating_v]
+                mean_score = np.mean(scores)
+                max_score = np.max(scores)
+                min_score = np.min(scores)
+                std_score = np.std(scores)
+                
+                rating_details = {
+                    "rated_user": user_to_rate,
+                    "rating_p": int(rating_p),
+                    "rating_i": int(rating_i),
+                    "rating_v": int(rating_v),
+                    "exclude": exclude,
+                    "mean_score": round(mean_score, 2),
+                    "max_score": int(max_score),
+                    "min_score": int(min_score),
+                    "std_score": round(std_score, 2),
+                    "timestamp": current_time
+                }
+        
+                if exclude:
+                    st.error(f"Hai deciso di non proseguire con {user_to_rate}.")
+                else:
+                    st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona), con {rating_i}/5 (all'interazione) e con {rating_v}/5 (alle vibes).")
+                st.json(rating_details)
 
     with tab2:
         st.write("Your matches will be displayed here.")
