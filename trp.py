@@ -18,7 +18,7 @@ with tab1:
         rating_v = st.slider("Voto alle vibes (1 = 😠, 5 = 🤩):", 1, 5, value=3, key="rating_v")
         st.write("Poche brevi informazioni sull'esclusione")
         exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
-        submit_button = st.form_submit_button("Submit Rating", on_click=reset_form)
+        submit_button = st.form_submit_button("Submit Rating")
 
     if submit_button:
         scores = [rating_p, rating_i, rating_v]
