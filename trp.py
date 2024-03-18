@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 import numpy as np
 
 # Mock data for user selection
@@ -21,6 +22,8 @@ with tab1:
         submit_button = st.form_submit_button("Submit Rating")
 
     if submit_button:
+         # Get the current time
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         scores = [rating_p, rating_i, rating_v]
         mean_score = np.mean(scores)
         max_score = np.max(scores)
@@ -36,7 +39,8 @@ with tab1:
             "mean_score": round(mean_score, 2),
             "max_score": int(max_score),
             "min_score": int(min_score),
-            "std_score": round(std_score, 2)
+            "std_score": round(std_score, 2),
+            "timestamp": current_time
         }
 
         if exclude:
