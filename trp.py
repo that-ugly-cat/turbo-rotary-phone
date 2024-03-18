@@ -48,7 +48,9 @@ with st.sidebar:
 #### Main app content
 if st.session_state['login_status']:
     # Mock data for user selection
-    users = list(user_password_dict.keys()).remove(username)
+    userlist = list(user_password_dict.keys())
+    userlist.remove(username)
+    users = ['a', 'a1', 'a2']
     
     st.title('TRP System🔥')
     
