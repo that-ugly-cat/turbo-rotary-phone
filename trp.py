@@ -4,11 +4,11 @@ import numpy as np
 from google.cloud import firestore # see: https://blog.streamlit.io/streamlit-firestore/
 
 #### Firebase connection
-try: 
+try:
     test_firebase_auth = st.secrets.firebase.type
     firebase_connected = 'yes'
     st.write('firebase connected')
-  except:
+except:
     firebase_connected = 'no'
     st.write('firebase NOT connected')
 
