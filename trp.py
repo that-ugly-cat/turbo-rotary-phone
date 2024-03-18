@@ -118,7 +118,7 @@ if st.session_state['login_status']:
             st.write(user_pool['recommended_3'])
             st.write(user_pool['recommended_4'])
             st.write(user_pool['recommended_5'])
-            st.write('\n Vai e divertiti!')
+            st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
 else:
