@@ -18,15 +18,7 @@ with open('auth.json', 'w') as f:
     db = firestore.Client.from_service_account_json('auth.json')
 
 #### User auth
-@st.cache_data
-def load_data(firestore_collection):
-    data = list(db.collection(firestore_collection).stream())
-    data_dict = list(map(lambda x: x.to_dict(), data))
-    user_df = pd.DataFrame(data_dict)
-    user_df = user_df[['username', 'password']]
-    return user_df
-user_df = load_data(initial_config.trp_users)
-st.write(user_df)
+
 
 #### Define users and passwords (for demonstration purposes only)
 # WARNING: This is not secure and is for demonstration only. Consider using a secure password handling and verification system.
