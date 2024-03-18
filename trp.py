@@ -30,6 +30,7 @@ with st.form(key='rating_form'):
 
 if submit_button:
     # Calculating mean, max, min, and standard deviation
+    scores = [rating_p, rating_i, rating_v]
     mean_score = np.mean(scores)
     max_score = np.max(scores)
     min_score = np.min(scores)
