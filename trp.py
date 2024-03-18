@@ -135,7 +135,7 @@ if st.session_state['login_status']:
             # Group by 'rated_user' and calculate the mean of 'mean_score' for each user
             average_scores_df = ratings_df.groupby('rated_user')['mean_score'].mean().reset_index()
             # Sort the DataFrame by 'average score' from lowest to highest
-            average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True)
+            average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
             st.write(average_scores_df)
             for user in users:
                 st.write(user)
