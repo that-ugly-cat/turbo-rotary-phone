@@ -47,14 +47,14 @@ with st.sidebar:
 
 #### Main app content
 if st.session_state['login_status']:
-    # Mock data for user selection
+    # List users
     userlist = list(user_password_dict.keys())
     userlist.remove(username)
     users = userlist
     
     st.title('TRP System🔥')
     
-    tab1, tab2 = st.tabs(["Vota", "Il tuo pool"])
+    tab1, tab2, tab3 = st.tabs(["Vota", "Il tuo pool", "Admin"])
     
     with tab1:
         with st.form(key='rating_form'):
@@ -120,6 +120,17 @@ if st.session_state['login_status']:
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
+
+#### Tab 3, admin
+    with tab3:
+        if username != 'admin':
+            st.write('Non sei l\'admin, quindi qui non c\'è niente di interessante per te.')
+        else:
+            ratings = list(db.collection('ratings').stream())
+            ratings_list = list(map(lambda x: x.to_dict(), ratings))
+            st.write(ratings_list)
+
+        
 else:
     st.info("Please login to access the application.")
 
