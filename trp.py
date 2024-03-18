@@ -20,7 +20,7 @@ def load_data(firestore_collection):
     user_df = pd.DataFrame(data_dict)
     user_df = user_df[['username', 'password']]
     return user_df
-user_df = load_data(initial_config.firestore_collection)
+user_df = load_data(initial_config.trp_users)
 st.write(user_df)
 
 #### Define users and passwords (for demonstration purposes only)
