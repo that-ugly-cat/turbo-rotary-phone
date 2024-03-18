@@ -131,6 +131,12 @@ if st.session_state['login_status']:
             ratings_l = list(map(lambda x: x.to_dict(), ratings))
             ratings_df = pd.DataFrame(ratings_l)
             st.write(ratings_df)
+
+            # Group by 'rated_user' and calculate the mean of 'mean_score' for each user
+            average_scores_df = df.groupby('rated_user')['mean_score'].mean().reset_index()
+            # Rename the columns to match the desired output
+            average_scores_df.columns = ['user', 'average score']
+            st.write(average_scores_df)
             for user in users:
                 st.write(user)
 
