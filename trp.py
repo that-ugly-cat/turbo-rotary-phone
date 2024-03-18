@@ -15,7 +15,7 @@ except:
 
 with open('auth.json', 'w') as f:
     json.dump(dict(st.secrets.firebase), f)
-    db = firestore.Client.from_service_account_json('auth.json')
+db = firestore.Client.from_service_account_json('auth.json')
 
 #### User auth
 
