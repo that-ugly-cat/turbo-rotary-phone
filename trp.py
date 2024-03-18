@@ -1,6 +1,18 @@
 import streamlit as st
 from datetime import datetime
 import numpy as np
+from google.cloud import firestore # see: https://blog.streamlit.io/streamlit-firestore/
+
+#### Firebase connection
+try: 
+    test_firebase_auth = st.secrets.firebase.type
+    firebase_connected = 'yes'
+    st.write('firebase connected')
+  except:
+    firebase_connected = 'no'
+    st.write('firebase NOT connected')
+
+
 
 #### Define users and passwords (for demonstration purposes only)
 # WARNING: This is not secure and is for demonstration only. Consider using a secure password handling and verification system.
