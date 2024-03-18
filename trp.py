@@ -50,7 +50,7 @@ if submit_button:
     }
     
     if exclude:
-        st.warning(f"Hai deciso di non proseguire con {user_to_rate}")
+        st.error(f"Hai deciso di non proseguire con {user_to_rate}")
     else:
         st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona), con {rating_i}/5 (all'interazione) e con con {rating_v}/5 (alle vibes).")
   # Showing the dictionary content for debugging or confirmation
