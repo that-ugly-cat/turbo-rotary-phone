@@ -131,6 +131,8 @@ if st.session_state['login_status']:
             ratings_l = list(map(lambda x: x.to_dict(), ratings))
             ratings_df = pd.DataFrame(ratings_l)
             st.write(ratings_df)
+            for user in users:
+                st.write(user)
 
         
 else:
