@@ -21,14 +21,8 @@ db = firestore.Client.from_service_account_json('auth.json')
 users = list(db.collection('trp_users').stream())
 users_list = list(map(lambda x: x.to_dict(), users))
 user_password_dict = {user_dict["user"]: user_dict["password"] for user_dict in users_list}
-st.write(user_password_dict)
 
-#### Define users and passwords (for demonstration purposes only)
-# WARNING: This is not secure and is for demonstration only. Consider using a secure password handling and verification system.
-USER_PASSWORD_PAIRS = {
-    "user1": "password1",
-    "user2": "password2"
-}
+USER_PASSWORD_PAIRS = user_password_dict
 
 # Function to verify login credentials
 def check_login(username, password):
