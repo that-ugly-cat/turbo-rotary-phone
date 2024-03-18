@@ -107,10 +107,10 @@ if st.session_state['login_status']:
                     st.error(f"An error occurred: {e}")
 
     with tab2:
-        st.write("Your matches will be displayed here.")
         pools = list(db.collection('pools').stream())
         pools_list = list(map(lambda x: x.to_dict(), pools))
         pools_dict = {item.pop("user"): item for item in pools_list}
+        st.write(pools_dict)
         try:
             user_pool = pools_dict[username]
             st.write(f'Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:\n  {user_pool[recommended_1]}\n  {user_pool[recommended_2]}\n  {user_pool[recommended_3]}\n  {user_pool[recommended_4]}\n  {user_pool[recommended_5]}\n')
