@@ -45,10 +45,10 @@ with st.sidebar:
             st.error("Username/password is incorrect.")
 #### end login section
 
-# Main app content
+#### Main app content
 if st.session_state['login_status']:
     # Mock data for user selection
-    users = ['Persona 1', 'Persona 2', 'Persona 3', 'Persona 4', 'Persona 5']
+    users = list(user_password_dict.keys()).remove(username)
     
     st.title('TRP System🔥')
     
