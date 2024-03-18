@@ -113,7 +113,8 @@ if st.session_state['login_status']:
         try:
             user_pool = pools_dict[username]
             st.write('Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:')
-            st.write(user_pool[recommended_1])
+            st.write(f'\n  {user_pool['recommended_1']}\n  {user_pool['recommended_2']}\n  {user_pool['recommended_3']}\n  {user_pool['recommended_4']}\n  {user_pool['recommended_5']}')
+            st.write('\n Vai e divertiti!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
 else:
