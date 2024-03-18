@@ -128,8 +128,8 @@ if st.session_state['login_status']:
         else:
             import pandas as pd
             ratings = list(db.collection('ratings').stream())
-            ratings_list = list(map(lambda x: x.to_dict(), ratings))
-            ratings_df = pd.DataFrame(ratings_list)
+            ratings_l = list(map(lambda x: x.to_dict(), ratings))
+            ratings_df = pd.DataFrame(ratings_l)
             st.write(ratings_df)
 
         
