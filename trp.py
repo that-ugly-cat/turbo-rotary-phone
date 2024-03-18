@@ -1,4 +1,5 @@
 import streamlit as st
+import numpy as np
 
 # Mock data for user selection
 users = ['Persona 1', 'Persona 2', 'Persona 3', 'Persona 4', 'Persona 5']
@@ -28,13 +29,24 @@ with st.form(key='rating_form'):
     submit_button = st.form_submit_button("Submit Rating")
 
 if submit_button:
+    # Calculate mean, max, and min of the scores
+    # Calculating mean, max, min, and standard deviation
+    mean_score = np.mean(scores)
+    max_score = np.max(scores)
+    min_score = np.min(scores)
+    std_score = np.std(scores)
+
     # Organizing inputs into a dictionary
     rating_details = {
-        "Persona": user_to_rate,
-        "Voto alla persona": rating_p,
-        "Voto all'interazione": rating_i,
-        "Voto alle vibes": rating_v,
-        "Esclusione": exclude
+        "rated_user": user_to_rate,
+        "rating_p": rating_p,
+        "rating_i": rating_i,
+        "rating_v": rating_v,
+        "exclude": exclude,
+        "mean_score": mean_score,
+        "max_score": max_score,
+        "min_score": min_score,
+        "std_score": std_score
     }
     
     if exclude:
