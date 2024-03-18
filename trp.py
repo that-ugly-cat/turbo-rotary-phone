@@ -79,6 +79,7 @@ if st.session_state['login_status']:
                 std_score = np.std(scores)
                 
                 rating_details = {
+                    "rating_user": username,
                     "rated_user": user_to_rate,
                     "rating_p": int(rating_p),
                     "rating_i": int(rating_i),
