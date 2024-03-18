@@ -96,6 +96,14 @@ if st.session_state['login_status']:
                 else:
                     st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona), con {rating_i}/5 (all'interazione) e con {rating_v}/5 (alle vibes).")
                 st.json(rating_details)
+                
+                # Save rating to dataframe
+                try:
+                    doc_ref = db.collection('ratings').document()
+                    doc_ref.set(rating_details)
+                    st.success("Rating submitted successfully.")
+                except Exception as e:
+                    st.error(f"An error occurred: {e}")
 
     with tab2:
         st.write("Your matches will be displayed here.")
