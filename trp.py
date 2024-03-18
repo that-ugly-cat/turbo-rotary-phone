@@ -126,9 +126,11 @@ if st.session_state['login_status']:
         if username != 'admin':
             st.write('Non sei l\'admin, quindi qui non c\'è niente di interessante per te.')
         else:
+            import pandas as pd
             ratings = list(db.collection('ratings').stream())
             ratings_list = list(map(lambda x: x.to_dict(), ratings))
-            st.write(ratings_list)
+            ratings_df = pd.DataFrame(data_dict)
+            st.write(ratings_df)
 
         
 else:
