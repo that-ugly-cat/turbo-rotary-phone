@@ -82,7 +82,7 @@ if st.session_state['login_status']:
             st.subheader('Siamo qui per conoscere persone nuove...')
             exclude = st.checkbox('Escludi questa persona dal tuo pool perché la conosci già', key="exclude")
             st.divider()
-            submit_button = st.form_submit_button("Vota!")
+            submit_button = st.form_submit_button("Vota!", type = 'primary')
 
             # submit logic
             if submit_button: 
