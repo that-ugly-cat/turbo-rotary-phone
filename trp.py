@@ -118,7 +118,8 @@ if st.session_state['login_status']:
             pool_ref = db.collection('pools').document(pool_name)
             pool = pool_ref.get()
             pool_dict = pool.to_dict()
-            st.write(pool_dict)
+            sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
+            st.write(sorted_pool_dict)
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
