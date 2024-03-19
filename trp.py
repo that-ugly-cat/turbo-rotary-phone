@@ -60,15 +60,14 @@ if st.session_state['login_status']:
     with tab1:
         with st.form(key='rating_form'):
             st.header("Vota")
-            st.write("Poche brevi informazioni sul ranking vanno qui")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
             rating_p = st_star_rating("Attrattività", maxValue=5, defaultValue=3, key="rating_p")
-            st.write('L\'attrazione fisica ed estetica')
+            st.write('C\'è attrazione fisica ed estetica?')
             rating_i = st_star_rating("Interazione", maxValue=5, defaultValue=3, key="rating_i")
-            st.write('La qualità dell\'interazione nel gioco di conoscenza')
+            st.write('L\'interazione nel gioco di conoscenza è stata buona?')
             rating_v = st_star_rating("Interessi comuni", maxValue=5, defaultValue=3, key="rating_v")
-            st.write('Il potenziale di proseguire con il reciproco interesse')
-            st.write('Hai appena parlato con qualcuno che ti dà brutte vibes, oppure con qualcuno che gia conosci? Se vuoi, puoi escluderlo dal tuo pool')
+            st.write('Quante cose avete in comune?')
+            st.write('Hai appena parlato con qualcun* che sicuramente non ti interessa, oppure che già conosci? Se vuoi, puoi escluderl* dal tuo pool selezionando questa casella.')
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
             submit_button = st.form_submit_button("Vota!")
 
@@ -122,8 +121,7 @@ if st.session_state['login_status']:
             st.header('Ecco il tuo pool')
             st.write('Se di fianco ad un nome vedi una faccina 😉 significa che hai fatto un\'impressione particolarmente buona.')
             for key, item in sorted_pool_dict.items(): 
-                st.write(item)
-            st.write(sorted_pool_dict)
+                st.write(f'  {item}')
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
