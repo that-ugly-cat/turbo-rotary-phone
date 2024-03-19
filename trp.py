@@ -61,6 +61,7 @@ if st.session_state['login_status']:
     with tab1:
         with st.form(key='rating_form'):
             st.header("Vota")
+            st_star_rating(label = "Please rate you experience", maxValue = 5, defaultValue = 3, key = "rating", emoticons = True )
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
             rating_p = st_star_rating("Attrattività", maxValue=5, defaultValue=3, key="rating_p")
             st.write('C\'è attrazione fisica ed estetica?')
