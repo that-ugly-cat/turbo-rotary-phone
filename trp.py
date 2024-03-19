@@ -170,7 +170,7 @@ if st.session_state['login_status']:
                 pool_dict = {}
                 for i, row in enumerate(top_5_df.itertuples(), 1):
                     key = f'recommended_{i}'
-                    value = f"{row.rated_user}{' 😉' if row.special_match else ''}"
+                    value = f"{row.rating_user}{' 😉' if row.special_match else ''}"
                     pool_dict[key] = value
                         
                 # write to firebase
