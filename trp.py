@@ -209,14 +209,14 @@ if st.session_state['login_status']:
                 
                 stat_dict_name = 'stats_' + user
                 stats_dict = {}
-                stats_dict['global_mean_p'] = mean_p_score
-                stats_dict['global_mean_i'] = mean_i_score
-                stats_dict['global_mean_v'] = mean_v_score
-                stats_dict['global_mean'] = mean_rating
-                stats_dict['stats_mean_rating_p'] = df_user['rating_p'].mean() # attrattività
-                stats_dict['stats_mean_rating_i'] = df_user['rating_i'].mean() # interazione
-                stats_dict['stats_mean_rating_v'] = df_user['rating_v'].mean() # interessi comuni
-                stats_dict['stats_mean_rating'] = df_user['mean_score'].mean() # media punteggi
+                stats_dict['global_mean_p'] = mean_p_score.round(2)
+                stats_dict['global_mean_i'] = mean_i_score.round(2)
+                stats_dict['global_mean_v'] = mean_v_score.round(2)
+                stats_dict['global_mean'] = mean_rating.round(2)
+                stats_dict['stats_mean_rating_p'] = df_user['rating_p'].mean().round(2) # attrattività
+                stats_dict['stats_mean_rating_i'] = df_user['rating_i'].mean().round(2) # interazione
+                stats_dict['stats_mean_rating_v'] = df_user['rating_v'].mean().round(2) # interessi comuni
+                stats_dict['stats_mean_rating'] = df_user['mean_score'].mean().round(2) # media punteggi
                 stats_dict['excluded_by'] = len(df_user[df_user['exclude'] == True]) # esclusioni
                 stats_dict['rated_by'] = len(df_user) # rated by
                 
