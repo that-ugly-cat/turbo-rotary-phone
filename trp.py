@@ -281,10 +281,20 @@ if st.session_state['login_status']:
             st.pyplot(fig)
             
             # Convert the data into a DataFrame for a better table display
-            data_items = stats_dict.items()
-            data_list = list(data_items)
-            df = pd.DataFrame(data_list, columns=['Metric', 'Value'])
-
+            # Selecting specific keys to display
+            selected_keys = ['global_mean_p', 'global_mean_i', 'global_mean_v', 
+                             'stats_mean_rating_p', 'stats_mean_rating_i', 'stats_mean_rating_v']
+            
+            # Creating a new dictionary with the selected keys
+            selected_stats_dict = {key: stats_dict[key] for key in selected_keys}
+            
+            # Convert the selected dictionary into a pandas DataFrame
+            # For a better display, we can split the keys into two parts and use them as separate columns
+            df = pd.DataFrame(list(selected_stats_dict.items()), columns=['Metric', 'Value'])
+            df[['Category', 'Type']] = df['Metric'].str.split('_', n=1, expand=True)
+            df = df.pivot(index='Category', columns='Type', values='Value').reset_index()
+            df.columns.name = None  # Remove the hierarchy name
+            
             # Display the DataFrame as a table in Streamlit
             st.table(df)
         except: 
