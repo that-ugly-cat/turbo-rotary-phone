@@ -288,13 +288,13 @@ if st.session_state['login_status']:
                     stats_dict['stats_mean_rating_p'],
                     stats_dict['stats_mean_rating_i'],
                     stats_dict['stats_mean_rating_v']
-                ],
+                    ],
                 'global_mean': [
                     stats_dict['global_mean_p'],
                     stats_dict['global_mean_i'],
                     stats_dict['global_mean_v']
-                ]
-            }
+                    ]
+                }
             
             # Create the DataFrame
             df = pd.DataFrame(data)
