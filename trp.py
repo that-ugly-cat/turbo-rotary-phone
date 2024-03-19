@@ -110,17 +110,14 @@ if st.session_state['login_status']:
                     st.error(f"Mmmh, qualcosa è andato storto: {e}")
 #### Tab 2, pool
     with tab2:
-        pools = list(db.collection('pools').stream())
-        pools_list = list(map(lambda x: x.to_dict(), pools))
-        pools_dict = {item.pop("user"): item for item in pools_list}
+        #pools = list(db.collection('pools').stream())
+        #pools_list = list(map(lambda x: x.to_dict(), pools))
+        #pools_dict = {item.pop("user"): item for item in pools_list}
         try:
-            user_pool = pools_dict[username]
-            st.write('Le persone che abbiamo selezionato per te sulla base del nostro bula bula algoritmico sono:')
-            st.write(user_pool['recommended_1'])
-            st.write(user_pool['recommended_2'])
-            st.write(user_pool['recommended_3'])
-            st.write(user_pool['recommended_4'])
-            st.write(user_pool['recommended_5'])
+            pool_name = 'pool_' + username
+            pool_ref = db.collection('pools').document(pool_name)
+            pool = pool_ref.get()
+            st.write(pool)
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
