@@ -79,8 +79,8 @@ if st.session_state['login_status']:
             rating_v = st_star_rating("", maxValue=5, defaultValue=3, key="rating_v", emoticons = True)
             st.divider()
 
-            st.subheader('Siamo qui per conoscere persone nuove...')
-            exclude = st.checkbox('Escludi questa persona dal tuo pool perché la conosci già', key="exclude")
+            st.subheader('Siamo qui per conoscere persone nuove e interessanti...')
+            exclude = st.checkbox('Escludi questa persona dal tuo pool perché la conosci già, o perché proprio non ti interessa', key="exclude")
             st.divider()
             submit_button = st.form_submit_button("Vota!", type = 'primary')
 
