@@ -279,7 +279,14 @@ if st.session_state['login_status']:
             
             # Display the plot in Streamlit
             st.pyplot(fig)
-            #st.write(f'Hai ricevuto le valutazioni di {stats_dict['rated_by']} persone. {stats_dict['excluded_by']} persone hanno deciso di non proseguire con te.')
+            
+            # Convert the data into a DataFrame for a better table display
+            data_items = stats_dict.items()
+            data_list = list(data_items)
+            df = pd.DataFrame(data_list, columns=['Metric', 'Value'])
+
+# Display the DataFrame as a table in Streamlit
+st.table(df)
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
