@@ -183,7 +183,7 @@ if st.session_state['login_status']:
                 st.write(df_user_ordered)
                 st.write(pool_dict)
             # save pools to firebase
-            pools_button = st.form_submit_button("Genera pools")
+            pools_button = st.button("Genera pools")
             if pools_button:
                 for key, item in pools_global_dict.items():
                     try:
