@@ -119,6 +119,8 @@ if st.session_state['login_status']:
             pool = pool_ref.get()
             pool_dict = pool.to_dict()
             sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
+            for key, item in sorted_pool_dict.items(): 
+                st.write(f'   {item}')
             st.write(sorted_pool_dict)
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
