@@ -149,8 +149,8 @@ if st.session_state['login_status']:
                 df_user['reciprocal'] = None
                 for index, row in df_user.iterrows():
                     # Find the reciprocal rating
-                    reciprocal_rating = ratings_df[(ratings_df['rating_user'] == row['rated_user']) & (ratings_df['rated_user'] == user)]['mean_score'].values
-                    # There could be multiple ratings; choose how to handle them. Here, we'll just take the first one if it exists.
+                    reciprocal_rating = ratings_df[ratings_df['rating_user'] == row['rated_user']]['mean_score'].values
+                    # There could be multiple ratings. Here, we'll just take the first one if it exists.
                     if len(reciprocal_rating) > 0:
                         df_user.at[index, 'reciprocal'] = reciprocal_rating[0]
                 # fill Nas with 0
