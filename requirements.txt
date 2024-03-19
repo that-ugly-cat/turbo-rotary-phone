@@ -3,3 +3,4 @@ numpy
 google-cloud-firestore
 pandas
 st-star-rating
+matplotlib
