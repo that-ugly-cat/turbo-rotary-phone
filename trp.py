@@ -141,6 +141,9 @@ if st.session_state['login_status']:
             # Sort the DataFrame by 'average score' from lowest to highest
             average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
             #st.write(average_scores_df)
+
+            # calculate pools
+            pools_global_dict = {}
             for user in average_scores_df['rated_user'].tolist():
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
@@ -172,10 +175,14 @@ if st.session_state['login_status']:
                     key = f'recommended_{i}'
                     value = f"{row.rating_user}{' 😉' if row.special_match else ''}"
                     pool_dict[key] = value
-                        
+                    
+                # append pool dict to global pool dict
+                pools_global_dict[dict_name] = pool_dict
+                
                 # write to firebase
                 st.write(df_user_ordered)
                 st.write(pool_dict)
+            st.write(pools_global_dict)
                
 
         
