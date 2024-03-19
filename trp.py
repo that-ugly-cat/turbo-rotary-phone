@@ -119,9 +119,13 @@ if st.session_state['login_status']:
             pool_dict = pool.to_dict()
             sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
             st.header('Ecco il tuo pool')
-            st.write('Se di fianco ad un nome vedi una faccina 😉 significa che hai fatto un\'impressione particolarmente buona.')
             for key, item in sorted_pool_dict.items(): 
                 st.write(f'-  {item}')
+                if '😉' in item:
+                    explainer_message = 'Se di fianco ad un nome vedi una faccina 😉 significa che hai fatto un\'impressione particolarmente buona.'
+                else:
+                    explainer_message = ''
+            st.write(explainer_message)
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
