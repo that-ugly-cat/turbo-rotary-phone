@@ -242,7 +242,7 @@ if st.session_state['login_status']:
             stats_dict = pool.to_dict()
             
             st.header('Le tue statistiche')
-            
+            st.write(stats_dict)
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
