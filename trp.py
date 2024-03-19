@@ -63,8 +63,9 @@ if st.session_state['login_status']:
             st.header("Vota")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
 
-            rating_i = st_star_rating("Com\'è stato parlarci?", maxValue=5, defaultValue=3, key="rating_i", emoticons = True)
+            st.subheader('Com\'è stato parlarci?')
             st.write('Hai riso, ti ha lasciato spazio, è interessante, hai scoperto cose nuove, ...')
+            rating_i = st_star_rating("", maxValue=5, defaultValue=3, key="rating_i", emoticons = True)
             
             rating_p = st_star_rating("Com\'è stata l\'attrazione?", maxValue=5, defaultValue=3, key="rating_p", emoticons = True)
             st.write('Il look, l\'età, è il tuo tipo, ...')
