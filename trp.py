@@ -138,7 +138,7 @@ if st.session_state['login_status']:
                 st.write('Se di fianco ad un nome vedi una faccina 😉 significa che hai fatto un\'impressione particolarmente buona.')
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
-            st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
+            st.write("Non abbiamo ancora creato un \"menù\" per te, abbi un attimino di pazienza :)")
 
 #### Tab 3, admin
     with tab3:
