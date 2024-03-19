@@ -154,7 +154,7 @@ if st.session_state['login_status']:
                     if len(reciprocal_rating) > 0:
                         df_user.at[index, 'reciprocal'] = reciprocal_rating[0]
                 # fill Nas with 0
-                df_user['reciprocal'].fillna(0, inplace=True)  # Replace None with 0
+                df_user['reciprocal'] = df_user['reciprocal'].fillna(0)  # Replace None with 0
                 # calculate mean and append as new column
                 df_user['match_mean'] = df_user[['mean_score', 'reciprocal']].mean(axis=1)
                 # calculate delta (module) and append as new column
