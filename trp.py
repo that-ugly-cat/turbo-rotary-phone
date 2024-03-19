@@ -109,9 +109,6 @@ if st.session_state['login_status']:
                     st.error(f"Mmmh, qualcosa è andato storto: {e}")
 #### Tab 2, pool
     with tab2:
-        #pools = list(db.collection('pools').stream())
-        #pools_list = list(map(lambda x: x.to_dict(), pools))
-        #pools_dict = {item.pop("user"): item for item in pools_list}
         try:
             pool_name = 'pool_' + username
             pool_ref = db.collection('pools').document(pool_name)
@@ -119,13 +116,16 @@ if st.session_state['login_status']:
             pool_dict = pool.to_dict()
             sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
             st.header('Ecco il tuo pool')
+            control_list = []
             for key, item in sorted_pool_dict.items(): 
                 st.write(f'-  {item}')
                 if '😉' in item:
                     explainer_message = 'Se di fianco ad un nome vedi una faccina 😉 significa che hai fatto un\'impressione particolarmente buona.'
+                    control_list.append(1)
                 else:
                     explainer_message = ''
-            st.write(explainer_message)
+            if len(control_list) > 0:
+                st.write(explainer_message)
             st.write('\n Ora è il momento di conoscere meglio queste persone, auguri!')
         except: 
             st.write("Non abbiamo ancora calcolato un pool per te, abbi un attimino di pazienza :)")
