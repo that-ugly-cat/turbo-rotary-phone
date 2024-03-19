@@ -197,12 +197,16 @@ if st.session_state['login_status']:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
 #### Tab 4, stats
     with tab4:
-        import pandas as pd
-        ratings = list(db.collection('ratings').stream())
-        ratings_l = list(map(lambda x: x.to_dict(), ratings))
-        ratings_df = pd.DataFrame(ratings_l)
-        ratings_df_user = ratings_df[ratings_df['rated_user'] == username]
-        st.write(ratings_df_user)
+        try:
+            stats_name = 'stats_' + username
+            stats_ref = db.collection('stats').document(stats_name)
+            stats = stats_ref.get()
+            stats_dict = pool.to_dict()
+            
+            st.header('Le tue statistiche')
+            
+        except: 
+            st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
         
 else:
