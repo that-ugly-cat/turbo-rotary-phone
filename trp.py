@@ -197,20 +197,41 @@ if st.session_state['login_status']:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
             # calculate stats
             stats_global_dict = {}
+            mean_p_score = ratings_df['rating_p'].mean()
+            mean_i_score = ratings_df['rating_i'].mean()
+            mean_v_score = ratings_df['rating_v'].mean()
+            mean_rating = ratings_df['mean_score'].mean()
+
+            # calculate stats for users
             for user in average_scores_df['rated_user'].tolist():
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
-                # create dictionary of top 5
+                
                 stat_dict_name = 'stats_' + user
                 stats_dict = {}
+                stats_dict['global_mean_p'] = mean_p_score
+                stats_dict['global_mean_i'] = mean_i_score
+                stats_dict['global_mean_v'] = mean_v_score
+                stats_dict['global_mean'] = mean_rating
                 stats_dict['stats_mean_rating_p'] = df_user['rating_p'].mean() # attrattività
                 stats_dict['stats_mean_rating_i'] = df_user['rating_i'].mean() # interazione
                 stats_dict['stats_mean_rating_v'] = df_user['rating_v'].mean() # interessi comuni
                 stats_dict['stats_mean_rating'] = df_user['mean_score'].mean() # media punteggi
                 stats_dict['excluded_by'] = len(df_user[df_user['exclude'] == True]) # esclusioni
                 stats_dict['rated_by'] = len(df_user) # rated by
+                
                 stats_global_dict[stat_dict_name] = stats_dict
-            st.write(stats_global_dict)
+                st.write(stat_dict_name)
+            # save stats to firebase
+            stats_button = st.button("Genera stats")
+            if stats_button:
+                for stats_name, stats_data in stats_global_dict.items():
+                    try:
+                        doc_ref = db.collection('stats').document(stats_name)
+                        doc_ref.set(stats_data)
+                        st.success(f"Stats per {stats_name} generato correttamente")
+                    except Exception as e:
+                        st.error(f"Mmmh, qualcosa è andato storto: {e}")
                 
 #### Tab 4, stats
     with tab4:
