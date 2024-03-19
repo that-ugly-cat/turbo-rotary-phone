@@ -164,9 +164,21 @@ if st.session_state['login_status']:
                 # order by mean (largest to smallest) and by delta (smallest to largest)
                 df_user_ordered = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
                 # Get top 5
-                df_user_ordered = df_user_ordered.head(5)
+                top_5_df = df_user_ordered.head(5)
+                # create dictionary of top 5
+                dict_name = 'pool_' + user
+                pool_dict = {}
+                for index, row in top_5_users.iterrows():
+                    key = f'recommended_{index + 1}'
+                    value = row['rating_user']
+                    if row['special_match']:
+                        value += ' 😉'
+                    pool_dict[key] = value
+                        
                 # write to firebase
                 st.write(df_user_ordered)
+                st.write(pool_dict)
+               
 
         
 else:
