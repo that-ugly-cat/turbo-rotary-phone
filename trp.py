@@ -185,10 +185,10 @@ if st.session_state['login_status']:
             # save pools to firebase
             pools_button = st.button("Genera pools")
             if pools_button:
-                for key, item in pools_global_dict.items():
+                for pool_name, pool_data in pools_global_dict.items():
                     try:
-                        doc_ref = db.collection('ratings').document(key)
-                        doc_ref.set(item)
+                        doc_ref = db.collection('pools').document(pool_name)
+                        doc_ref.set(pool_data)
                         st.success(f"Pool per {key} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
