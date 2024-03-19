@@ -247,7 +247,7 @@ if st.session_state['login_status']:
             st.write(stats_dict)
 
             # Define categories and their corresponding values
-            categories = ['Attractiveness', 'Interaction', 'Things in common']
+            categories = ['Attrattività', 'Interazione', 'Cose in comune']
             stats_means = [stats_dict['stats_mean_rating_p'], stats_dict['stats_mean_rating_i'], stats_dict['stats_mean_rating_v']]
             global_means = [stats_dict['global_mean_p'], stats_dict['global_mean_i'], stats_dict['global_mean_v']]
 
@@ -260,12 +260,12 @@ if st.session_state['login_status']:
             bar_width = 0.35
             index = np.arange(len(categories))
             
-            bars1 = ax.bar(index, stats_means, bar_width, label='Stats Mean Rating')
-            bars2 = ax.bar(index + bar_width, global_means, bar_width, label='Global Mean Rating')
+            bars1 = ax.bar(index, stats_means, bar_width, label='Le tue medie')
+            bars2 = ax.bar(index + bar_width, global_means, bar_width, label='Le medie generali')
 
             # Add horizontal lines for individual and global averages
-            ax.axhline(y=individual_avg, color='r', linestyle='-', label='La tua media')
-            ax.axhline(y=global_avg, color='b', linestyle='--', label='La media generale')
+            ax.axhline(y=individual_avg, color='gray', linestyle='-', label='La tua media')
+            ax.axhline(y=global_avg, color='gray', linestyle='--', label='La media generale')
 
             # Set the y-axis range from 0 to 5
             ax.set_ylim(0, 5)
