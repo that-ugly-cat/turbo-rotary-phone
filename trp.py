@@ -162,10 +162,10 @@ if st.session_state['login_status']:
                 # add the 'special match' column
                 df_user['special_match'] = df_user['mean_score'] >= 4
                 # order by mean (largest to smallest) and by delta (smallest to largest)
-                df_user = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
+                df_user_ordered = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
                 # Get top 5
                 # write to firebase
-                st.write(df_user)
+                st.write(df_user_ordered)
 
         
 else:
