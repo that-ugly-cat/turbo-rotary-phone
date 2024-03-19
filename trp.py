@@ -280,27 +280,6 @@ if st.session_state['login_status']:
             # Display the plot in Streamlit
             st.pyplot(fig)
             
-            # Convert the data into a DataFrame for a better table display
-            # Prepare the data for the DataFrame
-            data = {
-                'Category': ['p', 'i', 'v'],
-                'stats_mean': [
-                    stats_dict['stats_mean_rating_p'],
-                    stats_dict['stats_mean_rating_i'],
-                    stats_dict['stats_mean_rating_v']
-                    ],
-                'global_mean': [
-                    stats_dict['global_mean_p'],
-                    stats_dict['global_mean_i'],
-                    stats_dict['global_mean_v']
-                    ]
-                }
-            
-            # Create the DataFrame
-            df = pd.DataFrame(data)
-            
-            # Display the DataFrame as a table in Streamlit
-            st.table(df)
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
