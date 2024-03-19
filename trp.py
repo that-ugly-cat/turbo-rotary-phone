@@ -145,12 +145,25 @@ if st.session_state['login_status']:
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
                 df_user = df_user[df_user['exclude'] == False]
-                # get other rating and append as new column
+                # Initialize the 'reciprocal' column
+                df_user['reciprocal'] = None
+                for index, row in df_user.iterrows():
+                    # Find the reciprocal rating
+                    reciprocal_rating = ratings_df[(ratings_df['rating_user'] == row['rated_user']) & (ratings_df['rated_user'] == user)]['mean_score'].values
+                    # There could be multiple ratings; choose how to handle them. Here, we'll just take the first one if it exists.
+                    if len(reciprocal_rating) > 0:
+                        df_user.at[index, 'reciprocal'] = reciprocal_rating[0]
+                # fill Nas with 0
+                df_user['reciprocal'].fillna(0, inplace=True)  # Replace None with 0
                 # calculate mean and append as new column
+                df_user['match_mean'] = df_user[['mean_score', 'reciprocal']].mean(axis=1)
                 # calculate delta (module) and append as new column
+                df_user['delta_module'] = (df_user['mean_score'] - df_user['reciprocal']).abs()
+                # add the 'special match' column
+                df_user['special_match'] = df_user['mean_score'] >= 4
                 # order by mean (largest to smallest) and by delta (smallest to largest)
+                df_user = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
                 # Get top 5
-                # add asterisk to users giving a rating of 4 or more
                 # write to firebase
                 st.write(df_user)
 
