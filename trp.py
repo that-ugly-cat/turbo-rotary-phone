@@ -285,8 +285,8 @@ if st.session_state['login_status']:
             data_list = list(data_items)
             df = pd.DataFrame(data_list, columns=['Metric', 'Value'])
 
-# Display the DataFrame as a table in Streamlit
-st.table(df)
+            # Display the DataFrame as a table in Streamlit
+            st.table(df)
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
