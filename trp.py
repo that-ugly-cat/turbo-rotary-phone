@@ -60,9 +60,10 @@ if st.session_state['login_status']:
 #### Tab 1, vote    
     with tab1:
         with st.form(key='rating_form'):
-            st.header("Vota la persona")
-            user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
-
+            st.subheader("Con chi hai interagito?")
+            user_to_rate = st.selectbox("Scegli dalla lista:", options=users, key="user_to_rate")
+            st.divider()
+            
             st.subheader('Com\'è stato parlarci?')
             st.write('Hai riso, ti ha lasciato spazio, è interessante, hai scoperto cose nuove, ...')
             rating_i = st_star_rating("", maxValue=5, defaultValue=3, key="rating_i", emoticons = True)
