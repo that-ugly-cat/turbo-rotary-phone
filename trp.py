@@ -235,6 +235,8 @@ if st.session_state['login_status']:
                 
 #### Tab 4, stats
     with tab4:
+        import matplotlib.pyplot as plt
+        import numpy as np
         try:
             stats_name = 'stats_' + username
             stats_ref = db.collection('stats').document(stats_name)
@@ -243,6 +245,29 @@ if st.session_state['login_status']:
             
             st.header('Le tue statistiche')
             st.write(stats_dict)
+
+            # Define categories and their corresponding values
+            categories = ['Attractiveness', 'Interaction', 'Things in common']
+            stats_means = [stats_dict['stats_mean_rating_p'], stats_dict['stats_mean_rating_i'], stats_dict['stats_mean_rating_v']]
+            global_means = [stats_dict['global_mean_p'], stats_dict['global_mean_i'], stats_dict['global_mean_v']]
+            
+            # Create the bar plot
+            fig, ax = plt.subplots()
+            bar_width = 0.35
+            index = np.arange(len(categories))
+            
+            bars1 = ax.bar(index, stats_means, bar_width, label='Stats Mean Rating')
+            bars2 = ax.bar(index + bar_width, global_means, bar_width, label='Global Mean Rating')
+            
+            ax.set_xlabel('Category')
+            ax.set_ylabel('Scores')
+            ax.set_title('Mean Ratings by Category')
+            ax.set_xticks(index + bar_width / 2)
+            ax.set_xticklabels(categories)
+            ax.legend()
+            
+            # Display the plot in Streamlit
+            st.pyplot(fig)
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
