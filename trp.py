@@ -189,7 +189,7 @@ if st.session_state['login_status']:
                     try:
                         doc_ref = db.collection('pools').document(pool_name)
                         doc_ref.set(pool_data)
-                        st.success(f"Pool per {key} generato correttamente")
+                        st.success(f"Pool per {pool_name} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
             st.write(pools_global_dict)
