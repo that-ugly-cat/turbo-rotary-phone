@@ -221,15 +221,15 @@ if st.session_state['login_status']:
                 stats_dict['rated_by'] = len(df_user) # rated by
                 
                 stats_global_dict[stat_dict_name] = stats_dict
-                st.write(stat_dict_name)
+                st.write(stats_dict)
             # save stats to firebase
             stats_button = st.button("Genera stats")
             if stats_button:
-                for stats_name, stats_data in stats_global_dict.items():
+                for stat_dict_name, stats_data in stats_global_dict.items():
                     try:
-                        doc_ref = db.collection('stats').document(stats_name)
+                        doc_ref = db.collection('stats').document(stat_dict_name)
                         doc_ref.set(stats_data)
-                        st.success(f"Stats per {stats_name} generato correttamente")
+                        st.success(f"Stats per {stat_dict_name} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
                 
