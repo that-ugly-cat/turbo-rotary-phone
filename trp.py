@@ -60,18 +60,23 @@ if st.session_state['login_status']:
 #### Tab 1, vote    
     with tab1:
         with st.form(key='rating_form'):
-            st.header("Vota")
+            st.header("Vota la persona")
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
 
             st.subheader('Com\'è stato parlarci?')
             st.write('Hai riso, ti ha lasciato spazio, è interessante, hai scoperto cose nuove, ...')
             rating_i = st_star_rating("", maxValue=5, defaultValue=3, key="rating_i", emoticons = True)
+            st.divider()
             
-            rating_p = st_star_rating("Com\'è stata l\'attrazione?", maxValue=5, defaultValue=3, key="rating_p", emoticons = True)
-            st.write('Il look, l\'età, è il tuo tipo, ...')
+            st.subheader('Com\'è stata l\'attrazione?')
+            st.write('Lo stile, l\'età, è il tuo tipo, ha il giusto atteggiamento ...')
+            rating_p = st_star_rating("", maxValue=5, defaultValue=3, key="rating_p", emoticons = True)
+            st.divider()
             
-            rating_v = st_star_rating("Quante passioni in comune avete?", maxValue=5, defaultValue=3, key="rating_v", emoticons = True)
+            st.subheader('Quante passioni in comune avete?')
             st.write('Vi piacciono cose simili, oppure ti interessano cose che lei/lui sa/fa, ...')
+            rating_v = st_star_rating("", maxValue=5, defaultValue=3, key="rating_v", emoticons = True)
+            st.divider()
             
             st.write('Hai appena parlato con qualcun* che sicuramente non ti interessa, oppure che già conosci? Se vuoi, puoi escluderl* dal tuo pool selezionando questa casella.')
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
