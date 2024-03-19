@@ -179,11 +179,21 @@ if st.session_state['login_status']:
                 # append pool dict to global pool dict
                 pools_global_dict[dict_name] = pool_dict
                 
-                # write to firebase
+                # show data
                 st.write(df_user_ordered)
                 st.write(pool_dict)
-            st.write(pools_global_dict)
-               
+            # save pools to firebase
+            pools_button = st.form_submit_button("Genera pools")
+            if pools_button:
+                for key, item in pools_global_dict.items():
+                try:
+                    doc_ref = db.collection('ratings').document(key)
+                    doc_ref.set(item)
+                    st.success(f"Pool per {key} generato correttamente")
+                except Exception as e:
+                    st.error(f"Mmmh, qualcosa è andato storto: {e}")
+                st.write(pools_global_dict)
+                   
 
         
 else:
