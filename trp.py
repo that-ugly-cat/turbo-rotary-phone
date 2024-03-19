@@ -55,7 +55,7 @@ if st.session_state['login_status']:
     
     st.title('TRP System🔥')
     
-    tab1, tab2, tab3, tab4 = st.tabs(["Vota", "Il tuo pool", "Admin", "Stats"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Vota", "Portate principali", "Admin", "Stats"])
 
 #### Tab 1, vote    
     with tab1:
@@ -128,7 +128,7 @@ if st.session_state['login_status']:
             pool = pool_ref.get()
             pool_dict = pool.to_dict()
             sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
-            st.header('Ecco il tuo pool')
+            st.header('Ecco il tuo menù per la serata')
             control_list = []
             for key, item in sorted_pool_dict.items(): 
                 st.write(f'-  {item}')
