@@ -195,6 +195,23 @@ if st.session_state['login_status']:
                         st.success(f"Pool per {pool_name} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
+            # calculate stats
+            stats_global_dict = {}
+            for user in average_scores_df['rated_user'].tolist():
+                st.write(user)
+                df_user = ratings_df[ratings_df['rated_user'] == user]
+                # create dictionary of top 5
+                stat_dict_name = 'stats_' + user
+                stats_dict = {}
+                stats_dict['stats_mean_rating_p'] = df_user['rating_p'].mean() # attrattività
+                stats_dict['stats_mean_rating_i'] = df_user['rating_i'].mean() # interazione
+                stats_dict['stats_mean_rating_v'] = df_user['rating_v'].mean() # interessi comuni
+                stats_dict['stats_mean_rating'] = df_user['mean_score'].mean() # media punteggi
+                stats_dict['excluded_by'] = len(df_user[df_user['exclude'] == True]) # esclusioni
+                stats_dict['rated_by'] = len(df_user) # rated by
+                stats_global_dict[stat_dict_name] = stats_dict
+            st.write(stats_global_dict)
+                
 #### Tab 4, stats
     with tab4:
         try:
