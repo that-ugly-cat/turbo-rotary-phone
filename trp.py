@@ -195,7 +195,6 @@ if st.session_state['login_status']:
                         st.success(f"Pool per {pool_name} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
-            st.write(pools_global_dict)
                    
 
         
