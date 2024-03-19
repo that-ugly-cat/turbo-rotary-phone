@@ -168,11 +168,9 @@ if st.session_state['login_status']:
                 # create dictionary of top 5
                 dict_name = 'pool_' + user
                 pool_dict = {}
-                for index, row in top_5_df.iterrows():
-                    key = f'recommended_{index + 1}'
-                    value = row['rating_user']
-                    if row['special_match']:
-                        value += ' 😉'
+                for i, row in enumerate(top_5_df.itertuples(), 1):
+                    key = f'recommended_{i}'
+                    value = f"{row.rated_user}{' 😉' if row.special_match else ''}"
                     pool_dict[key] = value
                         
                 # write to firebase
