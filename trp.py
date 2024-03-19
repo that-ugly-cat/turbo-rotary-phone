@@ -140,7 +140,7 @@ if st.session_state['login_status']:
             average_scores_df = ratings_df.groupby('rated_user')['mean_score'].mean().reset_index()
             # Sort the DataFrame by 'average score' from lowest to highest
             average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
-            st.write(average_scores_df)
+            #st.write(average_scores_df)
             for user in average_scores_df['rated_user'].tolist():
                 st.write(user)
                 df_user = ratings_df[ratings_df['rated_user'] == user]
