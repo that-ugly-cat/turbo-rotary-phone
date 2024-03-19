@@ -61,13 +61,12 @@ if st.session_state['login_status']:
     with tab1:
         with st.form(key='rating_form'):
             st.header("Vota")
-            st_star_rating(label = "Please rate you experience", maxValue = 5, defaultValue = 3, key = "rating", emoticons = True )
             user_to_rate = st.selectbox("Scegli la persona:", options=users, key="user_to_rate")
-            rating_p = st_star_rating("Attrattività", maxValue=5, defaultValue=3, key="rating_p")
+            rating_p = st_star_rating("Attrattività", maxValue=5, defaultValue=3, key="rating_p", emoticons = True)
             st.write('C\'è attrazione fisica ed estetica?')
-            rating_i = st_star_rating("Interazione", maxValue=5, defaultValue=3, key="rating_i")
+            rating_i = st_star_rating("Interazione", maxValue=5, defaultValue=3, key="rating_i", emoticons = True)
             st.write('L\'interazione nel gioco di conoscenza è stata buona?')
-            rating_v = st_star_rating("Interessi comuni", maxValue=5, defaultValue=3, key="rating_v")
+            rating_v = st_star_rating("Interessi comuni", maxValue=5, defaultValue=3, key="rating_v", emoticons = True)
             st.write('Quante cose avete in comune?')
             st.write('Hai appena parlato con qualcun* che sicuramente non ti interessa, oppure che già conosci? Se vuoi, puoi escluderl* dal tuo pool selezionando questa casella.')
             exclude = st.checkbox('Non voglio più interagire con questa persona', key="exclude")
