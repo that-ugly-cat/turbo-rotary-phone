@@ -55,8 +55,9 @@ if st.session_state['login_status']:
     
     st.title('TRP System🔥')
     
-    tab1, tab2, tab3 = st.tabs(["Vota", "Il tuo pool", "Admin"])
-    
+    tab1, tab2, tab3, tab4 = st.tabs(["Vota", "Il tuo pool", "Admin", "Stats"])
+
+#### Tab 1, vote    
     with tab1:
         with st.form(key='rating_form'):
             st.header("Vota")
@@ -98,7 +99,7 @@ if st.session_state['login_status']:
                 if exclude:
                     st.error(f"Hai deciso di non proseguire con {user_to_rate}.")
                 else:
-                    st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (alla persona), con {rating_i}/5 (all'interazione) e con {rating_v}/5 (alle vibes).")
+                    st.success(f"Hai valutato {user_to_rate} con {rating_p}/5 (attrazione), con {rating_i}/5 (interazione) e con {rating_v}/5 (cose in comune).")
                 
                 # Save rating to dataframe
                 try:
@@ -194,7 +195,14 @@ if st.session_state['login_status']:
                         st.success(f"Pool per {pool_name} generato correttamente")
                     except Exception as e:
                         st.error(f"Mmmh, qualcosa è andato storto: {e}")
-                   
+#### Tab 4, stats
+    with tab4:
+        import pandas as pd
+        ratings = list(db.collection('ratings').stream())
+        ratings_l = list(map(lambda x: x.to_dict(), ratings))
+        ratings_df = pd.DataFrame(ratings_l)
+        ratings_df_user = ratings_df[ratings_df['rated_user'] == username]
+        st.write(ratings_df_user)
 
         
 else:
