@@ -244,7 +244,7 @@ if st.session_state['login_status']:
             stats_dict = stats.to_dict()
             
             st.header('Le tue statistiche')
-            st.write(stats_dict)
+            #st.write(stats_dict)
 
             # Define categories and their corresponding values
             categories = ['Attrattività', 'Interazione', 'Cose in comune']
@@ -279,6 +279,7 @@ if st.session_state['login_status']:
             
             # Display the plot in Streamlit
             st.pyplot(fig)
+            st.write(f'Hai ricevuto le valutazioni di {stats_dict['rated_by']} persone. {stats_dict['excluded_by']} persone hanno deciso di non proseguire con te.')
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
