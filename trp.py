@@ -277,8 +277,11 @@ if st.session_state['login_status']:
             ax.set_xticklabels(categories)
             ax.legend()
             
-            # Display the plot in Streamlit
-            st.pyplot(fig)
+            # Display the plot
+            st.write('Un breve testo che spiega il senso delle statistiche')
+            stats_show_button = st.button("Mostra stats")
+            if stats_show_button:
+                st.pyplot(fig)
             
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
