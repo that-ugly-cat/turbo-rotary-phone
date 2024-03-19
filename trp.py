@@ -49,7 +49,7 @@ with st.sidebar:
 #### Main app content
 if st.session_state['login_status']:
     # List users
-    userlist = list(user_password_dict.keys())
+    userlist = list(user_password_dict.keys()).sort()
     userlist.remove(username)
     users = userlist
     
