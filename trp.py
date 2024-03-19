@@ -279,7 +279,7 @@ if st.session_state['login_status']:
             
             # Display the plot in Streamlit
             st.pyplot(fig)
-            st.write(f'Hai ricevuto le valutazioni di {stats_dict['rated_by']} persone. {stats_dict['excluded_by']} persone hanno deciso di non proseguire con te.')
+            #st.write(f'Hai ricevuto le valutazioni di {stats_dict['rated_by']} persone. {stats_dict['excluded_by']} persone hanno deciso di non proseguire con te.')
         except: 
             st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
