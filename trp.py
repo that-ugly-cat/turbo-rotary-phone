@@ -53,7 +53,7 @@ if st.session_state['login_status']:
     userlist.remove(username)
     users = sorted(userlist)
     
-    st.title('TRP System🔥')
+    st.title('Barbecue 🔥')
     
     tab1, tab2, tab3, tab4 = st.tabs(["Vota", "Portate principali", "Admin", "Stats"])
 
@@ -128,7 +128,8 @@ if st.session_state['login_status']:
             pool = pool_ref.get()
             pool_dict = pool.to_dict()
             sorted_pool_dict = {key: pool_dict[key] for key in sorted(pool_dict)}
-            st.header('Ecco il tuo menù per la serata')
+            st.header('Ecco il tuo menù per la serata:')
+            st.write('Queste sono le persone con cui ti consigliamo di interagire per il resto della serata 😉')
             control_list = []
             for key, item in sorted_pool_dict.items(): 
                 st.write(f'-  {item}')
@@ -178,7 +179,7 @@ if st.session_state['login_status']:
                 # calculate delta (module) and append as new column
                 df_user['delta_module'] = (df_user['mean_score'] - df_user['reciprocal']).abs()
                 # add the 'special match' column
-                df_user['special_match'] = df_user['mean_score'] >= 4
+                df_user['special_match'] = df_user['mean_score'] >= 4.5
                 # order by mean (largest to smallest) and by delta (smallest to largest)
                 df_user_ordered = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
                 # Get top 5
