@@ -51,7 +51,7 @@ if st.session_state['login_status']:
     # List users
     userlist = list(user_password_dict.keys())
     userlist.remove(username)
-    users = userlist.sort()
+    users = sorted(userlist)
     
     st.title('TRP System🔥')
     
