@@ -239,7 +239,7 @@ if st.session_state['login_status']:
             stats_name = 'stats_' + username
             stats_ref = db.collection('stats').document(stats_name)
             stats = stats_ref.get()
-            stats_dict = pool.to_dict()
+            stats_dict = stats.to_dict()
             
             st.header('Le tue statistiche')
             st.write(stats_dict)
