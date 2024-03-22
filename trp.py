@@ -216,20 +216,25 @@ if st.session_state['login_status']:
                             st.success(f"Pool per {pool_name} generato correttamente")
                         except Exception as e:
                             st.error(f"Mmmh, qualcosa è andato storto: {e}")
-                # calculate stats
-                stats_global_dict = {}
-                mean_p_score = ratings_df['rating_p'].mean()
-                mean_i_score = ratings_df['rating_i'].mean()
-                mean_v_score = ratings_df['rating_v'].mean()
-                mean_rating = ratings_df['mean_score'].mean()
-
+                
+            # calculate stats for users
             calculate_stats_button = st.button("Calcola stats")
             if calculate_stats_button:
                 import pandas as pd
                 ratings = list(db.collection('ratings').stream())
                 ratings_l = list(map(lambda x: x.to_dict(), ratings))
                 ratings_df = pd.DataFrame(ratings_l)
-                # calculate stats for users
+                # Group by 'rated_user' and calculate the mean of 'mean_score' for each user
+                average_scores_df = ratings_df.groupby('rated_user')['mean_score'].mean().reset_index()
+                # Sort the DataFrame by 'average score' from lowest to highest
+                average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
+                # calculate stats
+                stats_global_dict = {}
+                mean_p_score = ratings_df['rating_p'].mean()
+                mean_i_score = ratings_df['rating_i'].mean()
+                mean_v_score = ratings_df['rating_v'].mean()
+                mean_rating = ratings_df['mean_score'].mean()
+                
                 for user in average_scores_df['rated_user'].tolist():
                     st.write(user)
                     df_user = ratings_df[ratings_df['rated_user'] == user]
