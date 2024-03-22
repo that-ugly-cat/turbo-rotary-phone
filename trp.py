@@ -207,16 +207,14 @@ if st.session_state['login_status']:
                     st.write(df_user_ordered)
                     st.write(pool_dict)
                 # save pools to firebase
-                pools_button = st.button("Salva pools")
-                if pools_button:
-                    for pool_name, pool_data in pools_global_dict.items():
-                        try:
-                            doc_ref = db.collection('pools').document(pool_name)
-                            doc_ref.set(pool_data)
-                            st.success(f"Pool per {pool_name} generato correttamente")
-                        except Exception as e:
-                            st.error(f"Mmmh, qualcosa è andato storto: {e}")
-                
+                for pool_name, pool_data in pools_global_dict.items():
+                    try:
+                        doc_ref = db.collection('pools').document(pool_name)
+                        doc_ref.set(pool_data)
+                        st.success(f"Pool per {pool_name} generato correttamente")
+                    except Exception as e:
+                        st.error(f"Mmmh, qualcosa è andato storto: {e}")
+            
             # calculate stats for users
             calculate_stats_button = st.button("Calcola stats")
             if calculate_stats_button:
@@ -253,17 +251,16 @@ if st.session_state['login_status']:
                     stats_dict['rated_by'] = len(df_user) # rated by
                     
                     stats_global_dict[stat_dict_name] = stats_dict
-                    st.write(stats_dict)
+                st.write(stats_dict)
                 # save stats to firebase
-                stats_button = st.button("Salva stats")
-                if stats_button:
-                    for stat_dict_name, stats_data in stats_global_dict.items():
-                        try:
-                            doc_ref = db.collection('stats').document(stat_dict_name)
-                            doc_ref.set(stats_data)
-                            st.success(f"Stats per {stat_dict_name} generato correttamente")
-                        except Exception as e:
-                            st.error(f"Mmmh, qualcosa è andato storto: {e}")
+                
+                for stat_dict_name, stats_data in stats_global_dict.items():
+                    try:
+                        doc_ref = db.collection('stats').document(stat_dict_name)
+                        doc_ref.set(stats_data)
+                        st.success(f"Stats per {stat_dict_name} generato correttamente")
+                    except Exception as e:
+                        st.error(f"Mmmh, qualcosa è andato storto: {e}")
                 
 #### Tab 4, stats
     with tab4:
