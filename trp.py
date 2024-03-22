@@ -223,7 +223,7 @@ if st.session_state['login_status']:
                 mean_v_score = ratings_df['rating_v'].mean()
                 mean_rating = ratings_df['mean_score'].mean()
 
-            calculate_stats_button = st.button()
+            calculate_stats_button = st.button("Calcola stats")
             if calculate_stats_button:
                 import pandas as pd
                 ratings = list(db.collection('ratings').stream())
