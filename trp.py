@@ -51,7 +51,7 @@ with st.sidebar:
 if st.session_state['login_status']:
     # List users
     userlist = list(user_password_dict.keys())
-    userlist.remove(username)
+    userlist.remove(username_login)
     users = sorted(userlist)
     
     st.title('Barbecue 🔥')
