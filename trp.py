@@ -33,6 +33,10 @@ def check_login(username, password):
 if 'login_status' not in st.session_state:
     st.session_state['login_status'] = False
 
+# Initialize username in session state
+if 'username' not in st.session_state:
+    st.session_state['username'] = ''
+
 # Login form in the sidebar
 with st.sidebar:
     st.title("Login")
