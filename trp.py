@@ -152,68 +152,70 @@ if st.session_state['login_status']:
         if username != 'admin':
             st.write('Non sei l\'admin, quindi qui non c\'è niente di interessante per te.')
         else:
-            import pandas as pd
-            ratings = list(db.collection('ratings').stream())
-            ratings_l = list(map(lambda x: x.to_dict(), ratings))
-            ratings_df = pd.DataFrame(ratings_l)
-            #st.write(ratings_df)
+            generate_pools_button = st.button("Genera stats")
+            if generate_pools_button:
+                import pandas as pd
+                ratings = list(db.collection('ratings').stream())
+                ratings_l = list(map(lambda x: x.to_dict(), ratings))
+                ratings_df = pd.DataFrame(ratings_l)
+                #st.write(ratings_df)
+    
+                # Group by 'rated_user' and calculate the mean of 'mean_score' for each user
+                average_scores_df = ratings_df.groupby('rated_user')['mean_score'].mean().reset_index()
+                # Sort the DataFrame by 'average score' from lowest to highest
+                average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
+                #st.write(average_scores_df)
 
-            # Group by 'rated_user' and calculate the mean of 'mean_score' for each user
-            average_scores_df = ratings_df.groupby('rated_user')['mean_score'].mean().reset_index()
-            # Sort the DataFrame by 'average score' from lowest to highest
-            average_scores_df = average_scores_df.sort_values(axis=0, by='mean_score', ascending=True).reset_index()
-            #st.write(average_scores_df)
-
-            # calculate pools
-            pools_global_dict = {}
-            for user in average_scores_df['rated_user'].tolist():
-                st.write(user)
-                df_user = ratings_df[ratings_df['rated_user'] == user]
-                df_user = df_user[df_user['exclude'] == False]
-                # Initialize the 'reciprocal' column
-                df_user['reciprocal'] = None
-                for index, row in df_user.iterrows():
-                    # Find the reciprocal rating
-                    reciprocal_rating = ratings_df[(ratings_df['rated_user'] == row['rating_user']) & (ratings_df['rating_user'] == user)]['mean_score'].values
-                    # There could be multiple ratings. Here, we'll just take the first one if it exists.
-                    if len(reciprocal_rating) > 0:
-                        df_user.at[index, 'reciprocal'] = reciprocal_rating[0]
-                # fill Nas with 0
-                df_user['reciprocal'] = df_user['reciprocal'].fillna(0)  # Replace None with 0
-                # calculate mean and append as new column
-                df_user['match_mean'] = df_user[['mean_score', 'reciprocal']].mean(axis=1)
-                # calculate delta (module) and append as new column
-                df_user['delta_module'] = (df_user['mean_score'] - df_user['reciprocal']).abs()
-                # add the 'special match' column
-                df_user['special_match'] = df_user['mean_score'] >= 4.5
-                # order by mean (largest to smallest) and by delta (smallest to largest)
-                df_user_ordered = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
-                # Get top 5
-                top_5_df = df_user_ordered.head(5)
-                # create dictionary of top 5
-                dict_name = 'pool_' + user
-                pool_dict = {}
-                for i, row in enumerate(top_5_df.itertuples(), 1):
-                    key = f'recommended_{i}'
-                    value = f"{row.rating_user}{' 😉' if row.special_match else ''}"
-                    pool_dict[key] = value
+                # calculate pools
+                pools_global_dict = {}
+                for user in average_scores_df['rated_user'].tolist():
+                    st.write(user)
+                    df_user = ratings_df[ratings_df['rated_user'] == user]
+                    df_user = df_user[df_user['exclude'] == False]
+                    # Initialize the 'reciprocal' column
+                    df_user['reciprocal'] = None
+                    for index, row in df_user.iterrows():
+                        # Find the reciprocal rating
+                        reciprocal_rating = ratings_df[(ratings_df['rated_user'] == row['rating_user']) & (ratings_df['rating_user'] == user)]['mean_score'].values
+                        # There could be multiple ratings. Here, we'll just take the first one if it exists.
+                        if len(reciprocal_rating) > 0:
+                            df_user.at[index, 'reciprocal'] = reciprocal_rating[0]
+                    # fill Nas with 0
+                    df_user['reciprocal'] = df_user['reciprocal'].fillna(0)  # Replace None with 0
+                    # calculate mean and append as new column
+                    df_user['match_mean'] = df_user[['mean_score', 'reciprocal']].mean(axis=1)
+                    # calculate delta (module) and append as new column
+                    df_user['delta_module'] = (df_user['mean_score'] - df_user['reciprocal']).abs()
+                    # add the 'special match' column
+                    df_user['special_match'] = df_user['mean_score'] >= 4.5
+                    # order by mean (largest to smallest) and by delta (smallest to largest)
+                    df_user_ordered = df_user.sort_values(by=['match_mean', 'delta_module'], ascending=[False, True])
+                    # Get top 5
+                    top_5_df = df_user_ordered.head(5)
+                    # create dictionary of top 5
+                    dict_name = 'pool_' + user
+                    pool_dict = {}
+                    for i, row in enumerate(top_5_df.itertuples(), 1):
+                        key = f'recommended_{i}'
+                        value = f"{row.rating_user}{' 😉' if row.special_match else ''}"
+                        pool_dict[key] = value
+                        
+                    # append pool dict to global pool dict
+                    pools_global_dict[dict_name] = pool_dict
                     
-                # append pool dict to global pool dict
-                pools_global_dict[dict_name] = pool_dict
-                
-                # show data
-                st.write(df_user_ordered)
-                st.write(pool_dict)
-            # save pools to firebase
-            pools_button = st.button("Genera pools")
-            if pools_button:
-                for pool_name, pool_data in pools_global_dict.items():
-                    try:
-                        doc_ref = db.collection('pools').document(pool_name)
-                        doc_ref.set(pool_data)
-                        st.success(f"Pool per {pool_name} generato correttamente")
-                    except Exception as e:
-                        st.error(f"Mmmh, qualcosa è andato storto: {e}")
+                    # show data
+                    st.write(df_user_ordered)
+                    st.write(pool_dict)
+                # save pools to firebase
+                pools_button = st.button("Salva pools")
+                if pools_button:
+                    for pool_name, pool_data in pools_global_dict.items():
+                        try:
+                            doc_ref = db.collection('pools').document(pool_name)
+                            doc_ref.set(pool_data)
+                            st.success(f"Pool per {pool_name} generato correttamente")
+                        except Exception as e:
+                            st.error(f"Mmmh, qualcosa è andato storto: {e}")
             # calculate stats
             stats_global_dict = {}
             mean_p_score = ratings_df['rating_p'].mean()
