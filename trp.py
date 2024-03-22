@@ -169,7 +169,6 @@ if st.session_state['login_status']:
                 # calculate pools
                 pools_global_dict = {}
                 for user in average_scores_df['rated_user'].tolist():
-                    st.write(user)
                     df_user = ratings_df[ratings_df['rated_user'] == user]
                     df_user = df_user[df_user['exclude'] == False]
                     # Initialize the 'reciprocal' column
@@ -251,8 +250,8 @@ if st.session_state['login_status']:
                     stats_dict['rated_by'] = len(df_user) # rated by
                     
                     stats_global_dict[stat_dict_name] = stats_dict
-                st.write(stats_dict)
-                # save stats to firebase
+                    st.write(stats_dict)
+                    # save stats to firebase
                 
                 for stat_dict_name, stats_data in stats_global_dict.items():
                     try:
