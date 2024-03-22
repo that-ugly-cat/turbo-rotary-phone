@@ -152,7 +152,7 @@ if st.session_state['login_status']:
         if username != 'admin':
             st.write('Non sei l\'admin, quindi qui non c\'è niente di interessante per te.')
         else:
-            generate_pools_button = st.button("Genera stats")
+            generate_pools_button = st.button("Genera pools")
             if generate_pools_button:
                 import pandas as pd
                 ratings = list(db.collection('ratings').stream())
