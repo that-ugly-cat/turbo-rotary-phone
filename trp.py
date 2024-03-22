@@ -42,16 +42,17 @@ with st.sidebar:
         if check_login(username_login, password_login):
             st.success("You are successfully logged in.")
             st.session_state['login_status'] = True
-            username = username_login
+            st.session_state['username'] = username_login
         else:
             st.error("Username/password is incorrect.")
 #### end login section
 
 #### Main app content
 if st.session_state['login_status']:
+    username = st.session_state['username']
     # List users
     userlist = list(user_password_dict.keys())
-    userlist.remove(username_login)
+    userlist.remove(username)
     users = sorted(userlist)
     
     st.title('Barbecue 🔥')
