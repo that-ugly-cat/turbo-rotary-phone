@@ -36,12 +36,13 @@ if 'login_status' not in st.session_state:
 # Login form in the sidebar
 with st.sidebar:
     st.title("Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username_login = st.text_input("Username")
+    password_login = st.text_input("Password", type="password")
     if st.button("Login"):
-        if check_login(username, password):
+        if check_login(username_login, password_login):
             st.success("You are successfully logged in.")
             st.session_state['login_status'] = True
+            username = username_login
         else:
             st.error("Username/password is incorrect.")
 #### end login section
