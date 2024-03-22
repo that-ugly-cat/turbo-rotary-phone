@@ -270,58 +270,58 @@ if st.session_state['login_status']:
         st.write('Le statistiche non servono a giudicare, ma ad offrirci la possibilità di scoprire come gli altri ci percepiscono. Questa è un\'opportunità per vederci da una nuova prospettiva, attraverso gli occhi degli altri. Le statistiche sono pensate per essere divertenti e positive, per celebrare le vostre qualità uniche e i momenti condivisi. Se volete, godetevi la scoperta!')
         password_stats = st.text_input("Password per le stat", type="password")
         stats_show_button = st.button("Mostra stats")
-            if stats_show_button:
-                if password_stats != 'la curiosità uccise il gatto':
-                    st.error('Mmmh, password sbagliata.')
-                else:
-                    import matplotlib.pyplot as plt
-                    import numpy as np
-                    try:
-                        stats_name = 'stats_' + username
-                        stats_ref = db.collection('stats').document(stats_name)
-                        stats = stats_ref.get()
-                        stats_dict = stats.to_dict()
-                        
-                        st.header('Le tue statistiche')
-                        #st.write(stats_dict)
-            
-                        # Define categories and their corresponding values
-                        categories = ['Attrattività', 'Interazione', 'Cose in comune']
-                        stats_means = [stats_dict['stats_mean_rating_p'], stats_dict['stats_mean_rating_i'], stats_dict['stats_mean_rating_v']]
-                        global_means = [stats_dict['global_mean_p'], stats_dict['global_mean_i'], stats_dict['global_mean_v']]
-            
-                        # The individual and global averages to be plotted as horizontal lines
-                        individual_avg = stats_dict['stats_mean_rating']
-                        global_avg = stats_dict['global_mean']
-                        
-                        # Create the bar plot
-                        fig, ax = plt.subplots()
-                        bar_width = 0.35
-                        index = np.arange(len(categories))
-                        
-                        bars1 = ax.bar(index, stats_means, bar_width, label='Le tue medie')
-                        bars2 = ax.bar(index + bar_width, global_means, bar_width, label='Le medie generali')
-            
-                        # Add horizontal lines for individual and global averages
-                        ax.axhline(y=individual_avg, color='gray', linestyle='-', label='La tua media')
-                        ax.axhline(y=global_avg, color='gray', linestyle='--', label='La media generale')
-            
-                        # Set the y-axis range from 0 to 5
-                        ax.set_ylim(0, 5)
-                        
-                        ax.set_xlabel('Categoria')
-                        ax.set_ylabel('Valutazioni')
-                        ax.set_title('Valutazioni medie per categoria')
-                        ax.set_xticks(index + bar_width / 2)
-                        ax.set_xticklabels(categories)
-                        ax.legend()
-                        
-                        # Display the plot
-                        
-                        st.pyplot(fig)
-                        
-                    except: 
-                        st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
+        if stats_show_button:
+            if password_stats != 'la curiosità uccise il gatto':
+                st.error('Mmmh, password sbagliata.')
+            else:
+                import matplotlib.pyplot as plt
+                import numpy as np
+                try:
+                    stats_name = 'stats_' + username
+                    stats_ref = db.collection('stats').document(stats_name)
+                    stats = stats_ref.get()
+                    stats_dict = stats.to_dict()
+                    
+                    st.header('Le tue statistiche')
+                    #st.write(stats_dict)
+        
+                    # Define categories and their corresponding values
+                    categories = ['Attrattività', 'Interazione', 'Cose in comune']
+                    stats_means = [stats_dict['stats_mean_rating_p'], stats_dict['stats_mean_rating_i'], stats_dict['stats_mean_rating_v']]
+                    global_means = [stats_dict['global_mean_p'], stats_dict['global_mean_i'], stats_dict['global_mean_v']]
+        
+                    # The individual and global averages to be plotted as horizontal lines
+                    individual_avg = stats_dict['stats_mean_rating']
+                    global_avg = stats_dict['global_mean']
+                    
+                    # Create the bar plot
+                    fig, ax = plt.subplots()
+                    bar_width = 0.35
+                    index = np.arange(len(categories))
+                    
+                    bars1 = ax.bar(index, stats_means, bar_width, label='Le tue medie')
+                    bars2 = ax.bar(index + bar_width, global_means, bar_width, label='Le medie generali')
+        
+                    # Add horizontal lines for individual and global averages
+                    ax.axhline(y=individual_avg, color='gray', linestyle='-', label='La tua media')
+                    ax.axhline(y=global_avg, color='gray', linestyle='--', label='La media generale')
+        
+                    # Set the y-axis range from 0 to 5
+                    ax.set_ylim(0, 5)
+                    
+                    ax.set_xlabel('Categoria')
+                    ax.set_ylabel('Valutazioni')
+                    ax.set_title('Valutazioni medie per categoria')
+                    ax.set_xticks(index + bar_width / 2)
+                    ax.set_xticklabels(categories)
+                    ax.legend()
+                    
+                    # Display the plot
+                    
+                    st.pyplot(fig)
+                    
+                except: 
+                    st.write("Non abbiamo ancora calcolato le tue statistiche, abbi un attimino di pazienza :)")
 
         
 else:
