@@ -268,6 +268,7 @@ if st.session_state['login_status']:
 #### Tab 4, stats
     with tab4:
         st.write('Le statistiche non servono a giudicare, ma ad offrirci la possibilità di scoprire come gli altri ci percepiscono. Questa è un\'opportunità per vederci da una nuova prospettiva, attraverso gli occhi degli altri. Le statistiche sono pensate per essere divertenti e positive, per celebrare le vostre qualità uniche e i momenti condivisi. Se volete, godetevi la scoperta!')
+        st.write('Per vedere le tue statistiche ti serve una password. Chiedi a Spit')
         password_stats = st.text_input("Password per le stat", type="password")
         stats_show_button = st.button("Mostra stats")
         if stats_show_button:
