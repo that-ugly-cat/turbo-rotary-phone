@@ -41,6 +41,7 @@ if 'username' not in st.session_state:
 with st.sidebar:
     st.title("Login")
     username_login = st.text_input("Username")
+    username_login = username_login.strip()
     password_login = st.text_input("Password", type="password")
     if st.button("Login"):
         if check_login(username_login, password_login):
